@@ -5,20 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * 登錄
- *
- * @author 程就人生
- * @Date
- */
-@Component
 public class UnzipController implements Initializable {
 
     @FXML
@@ -58,11 +49,11 @@ public class UnzipController implements Initializable {
         String password = this.password.getText();
         File folder = new File(folderPath);
         String errorMsg = "";
-        if (StringUtils.isEmpty(folderPath)) {
+        if ("".equals(folderPath.trim())) {
             errorMsg = "資料夾路徑不能爲空！";
         } else if (folder.exists() || !folder.isDirectory()) {
 //            errorMsg = "請確認資料夾路徑是否正確";
-        } else if (StringUtils.isEmpty(password)) {
+        } else if ("".equals(password.trim())) {
             errorMsg = "解壓縮密碼不能爲空！";
         }
         if (!"".equals(errorMsg)) {
