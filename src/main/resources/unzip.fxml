@@ -3,15 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="312.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.andy.unzipfx.UnzipController">
+<AnchorPane prefHeight="312.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andy.unzipfx.UnzipController">
     <children>
         <Label layoutX="81.0" layoutY="69.0" text="資料夾路徑" />
         <Label layoutX="81.0" layoutY="133.0" text="解壓縮密碼" />
-      <Button fx:id="unzipBtn" layoutX="231.0" layoutY="200.0" mnemonicParsing="false" onAction="#unzip" prefHeight="25.0" prefWidth="138.0" text="解壓縮" />
+      <Button fx:id="unzipBtn" layoutX="265.0" layoutY="200.0" mnemonicParsing="false" onAction="#unzip" prefHeight="25.0" prefWidth="138.0" text="解壓縮" />
       <PasswordField fx:id="password" layoutX="168.0" layoutY="129.0" prefHeight="25.0" prefWidth="332.0" />
       <TextField fx:id="folderPath" layoutX="168.0" layoutY="65.0" prefHeight="25.0" prefWidth="332.0" />
-      <ProgressBar fx:id="progress" visible="false" layoutX="200.0" layoutY="248.0" prefWidth="200.0" progress="0.0" />
+      <ProgressBar fx:id="progress" layoutX="89.0" layoutY="251.0" prefHeight="17.0" prefWidth="490.0" progress="0.0" visible="false" />
+      <Button fx:id="chooseFolderBtn" layoutX="523.0" layoutY="65.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="選擇資料夾" />
     </children>
 
 </AnchorPane>

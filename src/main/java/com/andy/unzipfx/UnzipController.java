@@ -10,13 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import net.lingala.zip4j.ZipFile;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +22,8 @@ import java.util.ResourceBundle;
 
 public class UnzipController implements Initializable {
 
+    @FXML
+    Button chooseFolderBtn;
     @FXML
     ProgressBar progress;
 
@@ -36,7 +36,7 @@ public class UnzipController implements Initializable {
     @FXML
     PasswordField password;
 
-    double nowProgress = 0;
+    private boolean onProcess = false;
 
 
     private MyApp myApp;
@@ -53,11 +53,25 @@ public class UnzipController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        chooseFolderBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                DirectoryChooser directoryChooser = new DirectoryChooser();
+                directoryChooser.setTitle("Choose Folder");
+                File directory = directoryChooser.showDialog(myApp.getMainStage());
+                if (directory != null) {
+                    setChooseFolder(directory.getAbsolutePath());
+                }
+            }
+        });
+    }
+
+    void setChooseFolder(String folder) {
+        this.folderPath.setText(folder);
     }
 
     @FXML
     public void unzip(ActionEvent actionEvent) throws InterruptedException {
-
         if (onProcess) {
             return;
         }
@@ -90,7 +104,7 @@ public class UnzipController implements Initializable {
             String[] info = newValue.split("___");
             //取得結果
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            if("ERROR".equals(info[0])) {
+            if ("ERROR".equals(info[0])) {
                 alert = new Alert(Alert.AlertType.ERROR);
             }
             alert.setContentText(info[1]);
@@ -132,7 +146,7 @@ public class UnzipController implements Initializable {
                                 folder.listFiles((file) -> file.getName().endsWith(".vip.zip"))
                         ));
                 if (files.size() == 0) {
-                    updateMessage("ERROR___找不到要解壓縮對象，請確認資料夾是否正確!" );
+                    updateMessage("ERROR___找不到要解壓縮對象，請確認資料夾是否正確!");
                     return false;
                 }
                 updateProgress(4, 10);
@@ -151,7 +165,6 @@ public class UnzipController implements Initializable {
                     updateMessage("ERROR___" + e.getMessage());
                     return false;
                 }
-
                 updateMessage("INFO___解壓縮完成");
                 return true;
             }
