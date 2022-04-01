@@ -31,6 +31,9 @@ public class MyApp extends Application {
         //展示窗口
         primaryStage.show();
     }
+    public Stage getMainStage() {
+        return this.mainStage;
+    }
 
     /**
      * 隱藏當前窗口
